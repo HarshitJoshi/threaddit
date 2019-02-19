@@ -1,0 +1,26 @@
+{
+  "name": "threaddit",
+  "version": "0.0.0",
+  "description": "Browse reddit highlights via terminal",
+  "main": "browse.js",
+  "scripts": {
+    "test": ""
+  },
+  "author": "Harshit Joshi",
+  "dependencies": {
+    "babel-runtime": "^6.26.0",
+    "chalk": "^2.4.1",
+    "commander": "^2.19.0",
+    "got": "^9.5.0",
+    "inquirer": "^6.2.1",
+    "snoowrap": "^1.15.2",
+    "terminal-img": "^1.1.0"
+  },
+  "keywords": [
+    "reddit",
+    "terminal",
+    "browse",
+    "reddit-api"
+  ],
+  "license": "MIT"
+}
