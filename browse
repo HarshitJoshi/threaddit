@@ -2,19 +2,18 @@
 'use strict';
 
 require('dotenv').config();
-console.log(process.env.USER_AGENT);
 const USER_AGENT = process.env.USER_AGENT;
 const CLIENT_ID = process.env.CLIENT_ID;
 const CLIENT_SECRET = process.env.CLIENT_SECRET;
-const USERNAME = process.env.USERNAME;
-const PASSWORD = process.env.PASSWORD;
+const USERNAME = process.env.REDDIT_USERNAME;
+const PASSWORD = process.env.REDDIT_PASSWORD;
 
 const config = {
-    USER_AGENT,
-    CLIENT_ID,
-    CLIENT_SECRET,
-    USERNAME,
-    PASSWORD
+    userAgent: USER_AGENT,
+    clientId: CLIENT_ID,
+    clientSecret: CLIENT_SECRET,
+    username: USERNAME,
+    password: PASSWORD
 };
 
 const snoowrap = require('snoowrap');
@@ -186,6 +185,7 @@ const main = async () => {
 	*/
 
 	try {
+        console.log(config);
 		const reddit = new snoowrap(config);
 		const browseObj = await sanitize();
 		const data = await retrieve({ reddit, browseObj });
