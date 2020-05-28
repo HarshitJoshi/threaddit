@@ -2,6 +2,21 @@
 'use strict';
 
 require('dotenv').config();
+console.log(process.env.USER_AGENT);
+const USER_AGENT = process.env.USER_AGENT;
+const CLIENT_ID = process.env.CLIENT_ID;
+const CLIENT_SECRET = process.env.CLIENT_SECRET;
+const USERNAME = process.env.USERNAME;
+const PASSWORD = process.env.PASSWORD;
+
+const config = {
+    USER_AGENT,
+    CLIENT_ID,
+    CLIENT_SECRET,
+    USERNAME,
+    PASSWORD
+};
+
 const snoowrap = require('snoowrap');
 //const config = require('./config.json');
 const program = require('commander');
