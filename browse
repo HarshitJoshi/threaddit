@@ -1,8 +1,9 @@
 #!/usr/bin/env node
 'use strict';
 
+require('dotenv').config();
 const snoowrap = require('snoowrap');
-const config = require('./config.json');
+//const config = require('./config.json');
 const program = require('commander');
 const inquirer = require('inquirer');
 const draw = require('terminal-img');
