@@ -1,21 +1,21 @@
 {
   "name": "threaddit",
   "version": "0.0.0",
-  "description": "Browse reddit highlights via terminal",
-  "main": "browse.js",
-  "scripts": {
-    "test": ""
-  },
+  "description": "Browse Reddit highlights via terminal",
+  "main": "index.js",
   "author": "Harshit Joshi",
+  "bin": {
+    "threaddit": "./browse.js"
+  },
   "dependencies": {
-    "babel-runtime": "^6.26.0",
-    "chalk": "^2.4.1",
-    "commander": "^2.19.0",
+    "blessed": "^0.1.81",
+    "blessed-contrib": "^4.8.20",
+    "colors": "^1.4.0",
     "dotenv": "^8.2.0",
-    "got": "^9.5.0",
-    "inquirer": "^6.2.1",
+    "neo-blessed": "^0.2.0",
+    "numeral": "^2.0.6",
     "snoowrap": "^1.15.2",
-    "terminal-img": "^2.0.11"
+    "winston": "^3.2.1"
   },
   "keywords": [
     "reddit",

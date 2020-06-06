@@ -1,5 +1,4 @@
-# Dependency directories
-node_modules/
-
-# Configuration file
 .env
+*.log
+.vscode
+node_modules/
