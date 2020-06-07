@@ -64,7 +64,6 @@ function createList(
 }
 
 module.exports.createPostsScreen = async (screen, grid, dataObj, config) => {
-  console.log(dataObj.subReddit);
   let subRedditObj = {
     currentSubReddit: dataObj.subReddit,
     currentSortOption: dataObj.sortOption
