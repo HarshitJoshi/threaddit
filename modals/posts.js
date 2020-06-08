@@ -7,6 +7,34 @@ const numeral = require('numeral');
 const colors = require('colors');
 const { getSubredditList, retrieveData } = require('../services/retrieveData');
 
+function createBox(
+  screen,
+  alignment,
+) {
+  return blessed.box({
+    parent: screen,
+    align: alignment,
+    scrollable: true,
+    top: '0',
+    left: '0',
+    vi: true,
+    keys: true,
+    tags: true,
+    mouse: false,
+    width: '100%',
+    height: '100%',
+    border: {
+      type: 'line',
+      fg: colorScheme.border
+    },
+    //style: {
+      //scrollbar: {
+        //bg: 'blue'
+      //},
+    //}
+  });
+}
+
 function createListTable(
   screen,
   alignment,
@@ -111,6 +139,12 @@ module.exports.createPostsScreen = async (screen, grid, dataObj, config) => {
       await this.previewPost(screen, postPreviewDetails, selectedPost);
     });
 
+    postsTable.on('select', async () => {
+      const selectedPostIdx = postsTable.selected - 1;
+      const selectedPost = dataObj.posts[selectedPostIdx];
+      await this.switchToFullArticle(screen, grid, selectedPost, config);
+    });
+
     postsTable.key(['a'], async () => {
       await this.switchSubReddit(screen, grid, config);
     });
@@ -127,6 +161,36 @@ module.exports.createPostsScreen = async (screen, grid, dataObj, config) => {
       postsTable.emit('attach');
     });
     postsTable.focus();
+  });
+};
+
+module.exports.switchToFullArticle = async (screen, grid, post, config) => {
+  return new Promise((resolve) => {
+    let article = createBox(screen, 'left');
+
+    const selectedPostUrl = post.url;
+    const author = post.author.name;
+    const score = post.score > 1000
+      ? numeral(post.score)
+        .format('0.00a')
+        .toString()
+      : post.score;
+    const title = post.title;
+    const createdAt = new Date((post.created_utc * 1000));
+    const postBody = post.selftext;
+    const postDetails = `{red-fg}{bold}${title}{/bold}{/red-fg}\n` +
+      `by {yellow-fg}${author}{/yellow-fg} on ${createdAt.toDateString()}\n` +
+      `Score: {blue-fg}${score}{/blue-fg}\n` +
+      `URL: {green-fg}${selectedPostUrl}{/green-fg}\n\n` +
+      `${postBody}`;
+
+    article.setContent(postDetails);
+
+    article.key(['backspace'], () => {
+      resolve(article.destroy());
+    });
+
+    article.focus();
   });
 };
 
